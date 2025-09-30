@@ -5,3 +5,4 @@ django-cleanup
 django-htmx
 pillow
 daphne
+shortuuid
