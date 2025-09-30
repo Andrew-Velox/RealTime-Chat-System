@@ -6,4 +6,5 @@ django-htmx
 pillow
 daphne
 shortuuid
+channels
 django-allauth==0.54.0
