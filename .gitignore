@@ -1,5 +1,4 @@
 venv/
 node/
-media/
 __pycache__/
 .env
