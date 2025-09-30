@@ -6,3 +6,4 @@ django-htmx
 pillow
 daphne
 shortuuid
+django-allauth==0.54.0
