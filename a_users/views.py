@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from allauth.account.utils import send_email_confirmation
+from allauth.account.models import EmailAddress
+from allauth.account.adapter import get_adapter
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -65,8 +66,11 @@ def profile_emailchange(request):
             # Then Signal updates emailaddress and set verified to False
             
             # Then send confirmation email 
-            # send_email_confirmation() will be deprecated soon!
-            send_email_confirmation(request, request.user)
+            try:
+                email_address = EmailAddress.objects.get(user=request.user, email=email)
+                get_adapter(request).send_confirmation_mail(request, email_address.emailconfirmation_set.create(), signup=False)
+            except EmailAddress.DoesNotExist:
+                pass
             
             return redirect('profile-settings')
         else:
@@ -98,7 +102,11 @@ def profile_usernamechange(request):
 
 @login_required
 def profile_emailverify(request):
-    send_email_confirmation(request, request.user)
+    try:
+        email_address = EmailAddress.objects.get(user=request.user, verified=False)
+        get_adapter(request).send_confirmation_mail(request, email_address.emailconfirmation_set.create(), signup=False)
+    except EmailAddress.DoesNotExist:
+        pass
     return redirect('profile-settings')
 
 
