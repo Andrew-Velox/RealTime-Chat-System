@@ -78,3 +78,7 @@ watchfiles==1.1.0
 websockets==15.0.1
 whitenoise==6.11.0
 zope.interface==8.0.1
+django-cleanup
+django-browser-reload
+django-htmx
+shortuuid
