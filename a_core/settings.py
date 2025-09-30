@@ -28,7 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
-CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
+CSRF_TRUSTED_ORIGINS = [ 
+    'https://*',
+    'https://realtime-chat-system-j74v.onrender.com',
+    'https://*.onrender.com'
+]
 
 
 # Application definition
